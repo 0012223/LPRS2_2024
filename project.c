@@ -356,6 +356,10 @@ Rect get_text_bounding_box(char *text, Vector2 startPos) {
     }
 	pos.y += TEXT_ROW_HEIGTH;
 
+	if (pos.x > max_x) {
+		max_x = pos.x;
+	}
+
 	pos.x = max_x - 1;
 
     bounding_box.size.x = pos.x - startPos.x - 1;
@@ -387,7 +391,7 @@ int main(void) {
 	uint16_t angle = 0;
 	uint16_t animation_tick = 0;
 
-	char text[] = "ФОКА\nШУБАРУ\nЧАЧКА";
+	char text[] = "СУБОТИЋ ЈАШЕ ФОКУ";
 	
 	while(1){
 		
