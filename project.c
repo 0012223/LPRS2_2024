@@ -90,11 +90,11 @@ const char *letter_catalog[] = {
 
 const Vector2 letter_postions[] = {
 	{0, 0}, {6, 0}, {12, 0}, {18, 0}, {23, 0}, {31, 0}, {38, 0}, {43, 0}, {52, 0}, {58, 0}, {64, 0}, {69, 0}, {75, 0}, {82, 0}, {92, 0}, {99, 0}, {105, 0}, {114, 0}, {120, 0}, {126, 0}, {132, 0}, {138, 0}, {144, 0}, {151, 0}, 
-	{0, 9}, {10, 9}, {16, 9}, {23, 9}, {29, 9}, {36, 9}
+	{0, 9}, {8, 9}, {14, 9}, {21, 9}, {27, 9}, {34, 9}
 };
 
 const uint8_t letter_spacing[] = {
-	6, 6, 6, 5, 8, 7, 5, 9, 6, 6, 5, 6, 7, 10, 7, 6, 9, 6, 6, 6, 6, 6, 7, 6, 10, 6, 7, 6, 7, 10
+	6, 6, 6, 5, 8, 7, 5, 9, 6, 6, 5, 6, 7, 10, 7, 6, 9, 6, 6, 6, 6, 6, 7, 6, 8, 6, 7, 6, 7, 10
 };
 
 
@@ -387,9 +387,7 @@ int main(void) {
 	uint16_t angle = 0;
 	uint16_t animation_tick = 0;
 
-	//char text[] = "СУБОТИЋ\nМИЛОШ\nРАДИО\nПРОЈЕКТ\nДДДДД";
-	// write text LPRS JE NAJBOLJI PREDMET in cyrillic
-	char text[] = "ЛПРС ЈЕ\nНАЈБОЉИ\nПРЕДМЕТ";
+	char text[] = "ФОКА\nШУБАРУ\nЧАЧКА";
 	
 	while(1){
 		
@@ -423,8 +421,6 @@ int main(void) {
 		player.y += player_velocity.y;
 
 		Rect text_bounding_box = get_text_bounding_box(text, text_pos);
-
-		printf("Text bounding box: %d %d\n", text_bounding_box.size.x, text_bounding_box.size.y);
 
 		if (text_pos.x + (int16_t)text_velocity.x < 0 || text_pos.x + (int16_t)text_velocity.x > SCREEN_RGB333_W - text_bounding_box.size.x) {
 			text_velocity.x = -text_velocity.x;
