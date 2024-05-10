@@ -351,9 +351,6 @@ Rect get_text_bounding_box(char *text, Vector2 startPos) {
         free(character_str);
     }
 
-    if (*(ptr - 1) != '\n') {
-        pos.x += letter_spacing[last_char_index];
-    }
 	pos.y += TEXT_ROW_HEIGTH;
 
 	if (pos.x > max_x) {
@@ -379,7 +376,6 @@ int main(void) {
 	gpu_p32[0] = 3; // RGB333 mode.
 	gpu_p32[0x800] = 0x0000ff00; // Magenta for HUD.
 
-
 	// Game state.
 
 	Vector2 player = {SCREEN_RGB333_W/2, SCREEN_RGB333_H/2};
@@ -391,7 +387,7 @@ int main(void) {
 	uint16_t angle = 0;
 	uint16_t animation_tick = 0;
 
-	char text[] = "СУБОТИЋ ЈАШЕ ФОКУ";
+	char text[] = "СУБОТИЋ\nЈАШ\nСУБОТИЋ";
 	
 	while(1){
 		
