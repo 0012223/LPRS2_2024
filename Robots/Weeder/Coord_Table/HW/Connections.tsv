@@ -1,5 +1,0 @@
-NEMA 17 wires	Winding	Arduino Driver Shield L293D
-red	A+	M1 outer
-blue	A-	M1 inner
-green	B+	M2 inner
-black	B-	M2 outer

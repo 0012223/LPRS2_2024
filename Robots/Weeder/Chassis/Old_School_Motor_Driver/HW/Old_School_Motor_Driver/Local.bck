@@ -1,9 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP 4050
-D Hex Buffer
-K CMOS BUFFER
-F http://www.intersil.com/content/dam/intersil/documents/cd40/cd4050bms.pdf
-$ENDCMP
-#
-#End Doc Library

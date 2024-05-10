@@ -1,3 +1,0 @@
-
-- 4x2 to be IDC
-- CD4070 part D unused

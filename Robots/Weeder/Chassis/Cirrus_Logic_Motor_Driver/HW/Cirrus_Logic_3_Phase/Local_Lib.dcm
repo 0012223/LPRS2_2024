@@ -1,8 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP ISO722M
-D Low Power Single-Channel 1/0 Digital Isolator, 150Mbps, Fail-Safe High, SO8
-K 1Ch Single Digital Isolator 150Mbps
-$ENDCMP
-#
-#End Doc Library
