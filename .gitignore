@@ -1,4 +1,4 @@
 .waf*/
 waf3*/
 .lock-waf_liunx_build
-build/*
+build/
