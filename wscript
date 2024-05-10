@@ -72,23 +72,6 @@ def configure(cfg):
 def build(bld):
 	bld.recurse('emulator')
 	
-	for p in ['intro', 'advanced_modes']:
-		bld.program(
-			features = 'cxx',
-			source = [p + '.c'],
-			use = 'emulator',
-			target = p
-		)
-		
-	digit_imgs = sorted(
-		glob.glob('images/red_*.png') + glob.glob('images/green_*.png')
-	)
-	bld(
-		rule = '${PYTHON} ${IMG_TO_SRC} -o ${TGT[0]} ${SRC} ' + \
-			'-f IDX4 -p 0x000000 -v',
-		source = digit_imgs,
-		target = ['sprites_idx4.c', 'sprites_idx4.h']
-	)
 	bld(
 		rule = '${PYTHON} ${IMG_TO_SRC} -o ${TGT[0]} ${SRC} ' + \
 			'-f RGB333',
@@ -100,20 +83,6 @@ def build(bld):
 			'-f RGB333',
 		source = 'images/sans_sprites.png',
 		target = ['sans_sprites_rgb333.c', 'sans_sprites_rgb333.h']
-	)
-	bld.program(
-		features = 'cxx',
-		source = ['sprites.c', 'sprites_idx4.c'],
-		includes = ['build/'],
-		use = 'emulator',
-		target = 'sprites'
-	)
-	bld.program(
-		features = 'cxx',
-		source = ['sprite_anim.c', 'sprites_rgb333.c'],
-		includes = ['build/'],
-		use = 'emulator',
-		target = 'sprite_anim'
 	)
 	
 	bld.program(
