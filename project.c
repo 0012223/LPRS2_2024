@@ -315,6 +315,16 @@ void render_letter(uint8_t letter_index, Vector2 pos) {
 			if (rgb333 == 0xffff) {
 				continue;
 			}
+			uint8_t overlay_r = 0b000;
+			uint8_t overlay_g = 0b000;
+			uint8_t overlay_b = 0b000;
+
+			uint8_t r = (rgb333 & 0b111) & overlay_r;
+			uint8_t g = ((rgb333 >> 3) & 0b111) & overlay_g;
+			uint8_t b = ((rgb333 >> 6) & 0b111) & overlay_b;
+
+			rgb333 = (r & 0b111) | ((g & 0b111) << 3) | ((b & 0b111) << 6);
+
 			unpack_rgb333_p32[(pos.y + i)*SCREEN_RGB333_W + pos.x + j] = rgb333;
 		}
 	}
@@ -463,7 +473,7 @@ int main(void) {
 	uint16_t angle = 0;
 	uint16_t animation_tick = 0;
 
-	char text[] = "„Ако каниш побиједити,\nне смијеш изгубити.“"; // „ “ charachters unable to be written normally
+	char text[] = "Марко Пушковић РА/230\nНемања Милошевић РА/200\nАлекса Становић РА/219"; // „ “
 	
 	while(1){
 		
