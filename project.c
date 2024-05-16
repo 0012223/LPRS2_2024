@@ -208,6 +208,30 @@ void draw_rectange_rgb333(Rect rect, Color color) {
 	}
 }
 
+void draw_line_rgb333(Vector2 pos1, Vector2 pos2, Color color) {
+	int16_t dx = abs(pos2.x - pos1.x);
+	int16_t dy = abs(pos2.y - pos1.y);
+	int16_t sx = pos1.x < pos2.x ? 1 : -1;
+	int16_t sy = pos1.y < pos2.y ? 1 : -1;
+	int16_t err = dx - dy;
+
+	while (1) {
+		draw_pixel_rgb333(pos1, color);
+		if (pos1.x == pos2.x && pos1.y == pos2.y) {
+			break;
+		}
+		int16_t e2 = 2*err;
+		if (e2 > -dy) {
+			err -= dy;
+			pos1.x += sx;
+		}
+		if (e2 < dx) {
+			err += dx;
+			pos1.y += sy;
+		}
+	}
+}
+
 void fill_rect_rgb333(Vector2 pos1, Vector2 pos2, Color color) {
 	for (uint16_t r = pos1.y; r < pos2.y; r++) {
 		for (uint16_t c = pos1.x; c < pos2.x; c++) {
@@ -513,6 +537,8 @@ int main(void) {
 				draw_pixel_rgb333((Vector2){x, y}, hsvToRGB(hue/(float)SCREEN_RGB333_W, saturation, value));
 			}
 		}
+
+		draw_line_rgb333((Vector2){text_bounding_box.pos.x + text_bounding_box.size.x/2, text_bounding_box.pos.y + text_bounding_box.size.y/2}, (Vector2){SCREEN_RGB333_W/2, SCREEN_RGB333_H/2}, (Color){0, 0, 0});
 		
 		draw_circle_rgb333((Vector2){text_bounding_box.pos.x + text_bounding_box.size.x/2, text_bounding_box.pos.y + text_bounding_box.size.y/2}, 50, (Color){0, 0, 0});
 
