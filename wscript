@@ -84,10 +84,16 @@ def build(bld):
 		source = 'images/sans_sprites.png',
 		target = ['sans_sprites_rgb333.c', 'sans_sprites_rgb333.h']
 	)
+	bld(
+		rule = '${PYTHON} ${IMG_TO_SRC} -o ${TGT[0]} ${SRC} ' + \
+			'-f RGB333',
+		source = 'images/rtrk_sprites.png',
+		target = ['rtrk_sprites_rgb333.c', 'rtrk_sprites_rgb333.h']
+	)
 	
 	bld.program(
 		features = 'cxx',
-		source = ['project.c', 'letter_sprites_rgb333.c', 'sans_sprites_rgb333.c'],
+		source = ['project.c', 'letter_sprites_rgb333.c', 'sans_sprites_rgb333.c', 'rtrk_sprites_rgb333.c'],
 		includes = ['build/'],
 		use = 'emulator',
 		target = 'project'

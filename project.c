@@ -12,6 +12,7 @@
 
 #include "letter_sprites_rgb333.h"
 #include "sans_sprites_rgb333.h"
+#include "rtrk_sprites_rgb333.h"
 
 
 #define TEXT_SPACE_WIDTH 3
@@ -587,9 +588,19 @@ int main(void) {
 			animation = 46;
 		}
 
+		for (uint16_t i = 0; i < 50; ++i) {
+			for (uint16_t j = 0; j < 50; ++j) {
+				uint16_t rgb333 = rtrk_sprites__p[i*rtrk_sprites__w + j];
+				if (rgb333 == 0xffff) {
+					continue;
+				}
+				unpack_rgb333_p32[(SCREEN_RGB333_H/2 - 25 + i)*SCREEN_RGB333_W + SCREEN_RGB333_W/2 - 25 + j] = rgb333;
+			}
+		}
+
 		for (uint16_t i = 0; i < 30; ++i) {
 			for (uint16_t j = 0; j < 23; ++j) {
-				uint16_t rgb333 = sans_sprites__p[(sprite + i)*letter_sprites__w + animation + j];
+				uint16_t rgb333 = sans_sprites__p[(sprite + i)*sans_sprites__w + animation + j];
 				if (rgb333 == 0xffff) {
 					continue;
 				}
