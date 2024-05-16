@@ -75,7 +75,7 @@ def img_to_src(
 					if R == 0 and G == 0 and B == 0:
 						p = 2**16-1
 					else:
-						p = (B>>3 & 0x7)<<6 | (G>>3 & 0x7)<<3 | R>>5
+						p = (B>>5 & 0xff)<<6 | (G>>5 & 0xff)<<3 | R>>5
 					sprite.p.append(p)
 		
 	elif format == 'IDX4' or format == 'IDX1':
