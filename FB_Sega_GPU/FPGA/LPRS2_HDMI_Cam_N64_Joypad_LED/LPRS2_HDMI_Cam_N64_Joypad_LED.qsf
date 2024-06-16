@@ -140,6 +140,12 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_cam_xclk
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to io_n64_joypad_1
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to io_n64_joypad_2
 
+set_global_assignment -name VERILOG_FILE DE0/N64_controller.v
+set_global_assignment -name VERILOG_FILE DE0/doublesync_inst.v
+set_global_assignment -name VERILOG_FILE DE0/doublesync.v
+set_global_assignment -name VERILOG_FILE DE0/async_trap_and_reset_inst.v
+set_global_assignment -name VERILOG_FILE DE0/async_trap_and_reset.v
+set_global_assignment -name VERILOG_FILE DE0_Nano_Wrapper.v
 set_global_assignment -name VHDL_FILE common/counter.vhd
 set_global_assignment -name VHDL_FILE common/delay_vec.vhd
 set_global_assignment -name VHDL_FILE common/dual_clk_dual_port_ram.vhd

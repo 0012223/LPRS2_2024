@@ -36,6 +36,7 @@ architecture arch of lprs2_hdmi_cam_n64_joypad_led is
 	signal n_rst : std_logic;
 	signal hdmi_clk : std_logic;
 	signal gpu_clk : std_logic;
+	signal n64_clk : std_logic;
 	
 	signal pix_phase : t_pix_phase;
 	signal pix_x : t_pix_x;
@@ -46,8 +47,24 @@ architecture arch of lprs2_hdmi_cam_n64_joypad_led is
 	signal cam_rgb656 : t_rgb565;
 	signal cam_rgb : t_rgb888;
 	
-begin
+	signal button_bits: std_logic_vector(33 downto 0);
 	
+	component DE0_Nano_Wrapper
+        port (
+            n64_clk_50Hz : in std_logic;
+            buttons_sig : out std_logic_vector(33 downto 0);
+            n64_data : inout std_logic
+        );
+    end component;
+begin
+
+	U_DE0_Nano_Wrapper : DE0_Nano_Wrapper
+	port map (
+	  n64_clk_50Hz => n64_clk,
+	  buttons_sig => button_bits,
+	  n64_data => io_n64_joypad_1
+	);
+
 	pll_rst <= not in_rst;
 	pll_inst: entity work.PLL
 	port map (
@@ -55,6 +72,7 @@ begin
 		areset => pll_rst,
 		c0 => hdmi_clk,
 		c1 => gpu_clk,
+		c2 => n64_clk,
 		locked => n_rst
 	);
 	
@@ -123,8 +141,8 @@ begin
 		i_pix_y         => pix_y,
 		o_pix_rgb       => pix_rgb,
 		
-		io_n64_joypad_1 => io_n64_joypad_1,
 		io_n64_joypad_2 => io_n64_joypad_2,
+		buttons			 => button_bits,
 		
 		o_led           => o_led
 	);
