@@ -1,0 +1,162 @@
+module N64_controller(
+		input clk_50MHZ,
+		inout data,
+		input start,
+		output reg [33:0]buttons=34'd0
+);
+							//finish___oe__get__state
+localparam IDLE_FSM		 =	7'b0________0___0_0000;
+localparam POLL_FSM		 =	7'b0________1___0_0001;
+localparam SEND0_FSM1	 =	7'b0________1___0_0010;
+localparam SEND0_FSM2	 =	7'b0________1___0_0011;
+localparam SEND1_FSM1	 =	7'b0________1___0_0100;
+localparam SEND1_FSM2	 =	7'b0________1___0_0101;
+localparam GET_FSM 		 =	7'b0________0___0_0110;
+localparam GET2_FSM 	 =	7'b0________0___1_0111;
+localparam FINISH_FSM 	 =	7'b1________0___0_1000;
+			
+
+localparam THREEuSECONDS = 10'd150;
+localparam ONEuSECONDS = 10'd50;
+
+reg [6:0]state=IDLE_FSM;
+reg [9:0]counter_delay =10'd0;
+reg [3:0]counter_polling =4'd0;
+reg [5:0]counting_data =6'd0;
+wire [8:0]polling_data=9'b110000000;
+reg [33:0]buffer_buttons=34'd0;
+wire oe=state[5];
+wire finish=state[6];
+wire counting_data_clk=state[4];
+wire data_out=state[0];
+wire data_in=data;
+assign data = oe ? data_out: 1'bz;
+
+always@(posedge data_out, negedge oe)
+begin
+	if(oe==1'b0)
+	begin
+		counter_polling[3:0]<=4'd0;
+	end
+	else
+	begin
+		counter_polling[3:0]<=counter_polling[3:0]+1'b1;
+	end
+end
+
+always@(posedge counting_data_clk, posedge finish)
+begin
+	buttons[33:0]<=buttons[33:0];
+	buffer_buttons[33:0]<={buffer_buttons[32:0],data_in};
+    counting_data[5:0]<=counting_data[5:0]+1'b1;
+	if(finish==1'b1)
+	begin
+		buffer_buttons[33:0]<=34'd0;
+		buttons[33:0]<=buffer_buttons[33:0];
+		counting_data[5:0]<=6'd0;
+	end
+end
+
+
+always@(posedge clk_50MHZ)
+begin
+	case(state[6:0])
+	IDLE_FSM	:begin	 	
+					counter_delay[9:0]<=10'd0;
+					state[6:0]<=IDLE_FSM;
+					if(start)
+					begin
+						state[6:0]<=POLL_FSM;
+					end
+				 end
+	POLL_FSM	:begin	 
+					counter_delay[9:0]<=THREEuSECONDS;// otherwise go to get the data
+					state[6:0]<=GET_FSM;
+					if(counter_polling[3:0]<=4'd8)
+					begin
+						counter_delay[9:0]<=ONEuSECONDS;//send a 1 starting from 1 us
+						state[6:0]<=SEND1_FSM1;
+						if(polling_data[counter_polling[3:0]]==1'b0)
+						begin
+							counter_delay[9:0]<=THREEuSECONDS;
+							state[6:0]<=SEND0_FSM1;//send a 0  starting from 3 us
+						end
+					end
+				 end
+	SEND0_FSM1	:begin// send a 0  
+					state[6:0]<=SEND0_FSM1;
+					counter_delay[9:0]<=counter_delay[9:0]-1'b1;
+					if(counter_delay[9:0]==10'd0)
+					begin
+						state[6:0]<=SEND0_FSM2;
+						counter_delay[9:0]<=ONEuSECONDS;
+					end
+				 end
+	SEND0_FSM2	:begin
+					state[6:0]<=SEND0_FSM2;
+					counter_delay[9:0]<=counter_delay[9:0]-1'b1;
+					if(counter_delay[9:0]==10'd0)
+					begin
+						state[6:0]<=POLL_FSM;
+					end
+				 end
+	SEND1_FSM1	:begin
+					state[6:0]<=SEND1_FSM1;
+					counter_delay[9:0]<=counter_delay[9:0]-1'b1;
+					if(counter_delay[9:0]==10'd0)
+					begin
+						state[6:0]<=SEND1_FSM2;
+						counter_delay[9:0]<=THREEuSECONDS;
+					end
+				 end
+	SEND1_FSM2	:begin
+					state[6:0]<=SEND1_FSM2;
+					counter_delay[9:0]<=counter_delay[9:0]-1'b1;
+					if(counter_delay[9:0]==10'd0)
+					begin
+						state[6:0]<=POLL_FSM;
+					end
+				 end
+	GET_FSM 	:begin	 
+					state[6:0]<=GET_FSM;
+					counter_delay[9:0]<=counter_delay[9:0]-1'b1;
+					if(counter_delay[9:0]==10'd0)
+					begin
+						state[6:0]<=GET2_FSM;
+						counter_delay[9:0]<=ONEuSECONDS;
+					end
+				 end
+	GET2_FSM 	:begin
+					state[6:0]<=GET2_FSM;
+					counter_delay[9:0]<=counter_delay[9:0]-1'b1;
+					if(counter_delay[9:0]==10'd0)
+					begin
+						if(counting_data[5:0]==6'd33)
+						begin
+							state[6:0]<=FINISH_FSM;
+							counter_delay[9:0]<=ONEuSECONDS;
+						end
+						else
+						begin
+							state[6:0]<=GET_FSM;
+							counter_delay[9:0]<=THREEuSECONDS;
+						end
+					end
+				 end
+	FINISH_FSM 	:begin
+					state[6:0]<=FINISH_FSM;
+					counter_delay[9:0]<=counter_delay[9:0]-1'b1;
+					if(counter_delay[9:0]==10'd0)
+					begin
+						state[6:0]<=IDLE_FSM;
+					end
+				 end
+	default		:begin
+					state[6:0]<=IDLE_FSM;
+					counter_delay[9:0]<=10'd0;
+				 end
+	endcase
+end
+
+
+endmodule

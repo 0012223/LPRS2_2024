@@ -1,0 +1,45 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "o_led[0]",
+					"strict" : false
+				},
+				{
+					"name" : "o_led[1]",
+					"strict" : false
+				},
+				{
+					"name" : "o_led[2]",
+					"strict" : false
+				},
+				{
+					"name" : "o_led[3]",
+					"strict" : false
+				},
+				{
+					"name" : "o_led[4]",
+					"strict" : false
+				},
+				{
+					"name" : "o_led[5]",
+					"strict" : false
+				},
+				{
+					"name" : "o_led[6]",
+					"strict" : false
+				},
+				{
+					"name" : "o_led[7]",
+					"strict" : false
+				},
+				{
+					"name" : "io_n64_joypad_1",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

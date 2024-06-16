@@ -1,0 +1,149 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -7.149
+TNS   : -146.917
+
+Type  : Slow 1200mV 85C Model Setup 'N64_controller:N64_controller_inst|state[0]'
+Slack : -0.437
+TNS   : -0.797
+
+Type  : Slow 1200mV 85C Model Hold 'N64_controller:N64_controller_inst|state[0]'
+Slack : 0.364
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.364
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'N64_controller:N64_controller_inst|state[0]'
+Slack : -5.600
+TNS   : -22.400
+
+Type  : Slow 1200mV 85C Model Recovery 'N64_controller:N64_controller_inst|data_in'
+Slack : -5.026
+TNS   : -9.964
+
+Type  : Slow 1200mV 85C Model Removal 'N64_controller:N64_controller_inst|data_in'
+Slack : 3.226
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'N64_controller:N64_controller_inst|state[0]'
+Slack : 3.552
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'N64_controller:N64_controller_inst|state[0]'
+Slack : -1.487
+TNS   : -5.948
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'N64_controller:N64_controller_inst|data_in'
+Slack : -1.487
+TNS   : -2.974
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 9.649
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'i_clk'
+Slack : 41.533
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -6.647
+TNS   : -136.552
+
+Type  : Slow 1200mV 0C Model Setup 'N64_controller:N64_controller_inst|state[0]'
+Slack : -0.356
+TNS   : -0.582
+
+Type  : Slow 1200mV 0C Model Hold 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.325
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'N64_controller:N64_controller_inst|state[0]'
+Slack : 0.326
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'N64_controller:N64_controller_inst|state[0]'
+Slack : -5.510
+TNS   : -22.040
+
+Type  : Slow 1200mV 0C Model Recovery 'N64_controller:N64_controller_inst|data_in'
+Slack : -4.844
+TNS   : -9.664
+
+Type  : Slow 1200mV 0C Model Removal 'N64_controller:N64_controller_inst|data_in'
+Slack : 2.912
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'N64_controller:N64_controller_inst|state[0]'
+Slack : 3.081
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'N64_controller:N64_controller_inst|state[0]'
+Slack : -1.487
+TNS   : -5.948
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'N64_controller:N64_controller_inst|data_in'
+Slack : -1.487
+TNS   : -2.974
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 9.644
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'i_clk'
+Slack : 41.387
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -3.088
+TNS   : -67.603
+
+Type  : Fast 1200mV 0C Model Setup 'N64_controller:N64_controller_inst|state[0]'
+Slack : 0.393
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.152
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'N64_controller:N64_controller_inst|state[0]'
+Slack : 0.153
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'N64_controller:N64_controller_inst|state[0]'
+Slack : -2.612
+TNS   : -10.448
+
+Type  : Fast 1200mV 0C Model Recovery 'N64_controller:N64_controller_inst|data_in'
+Slack : -2.506
+TNS   : -4.829
+
+Type  : Fast 1200mV 0C Model Removal 'N64_controller:N64_controller_inst|data_in'
+Slack : 1.172
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'N64_controller:N64_controller_inst|state[0]'
+Slack : 1.343
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'N64_controller:N64_controller_inst|state[0]'
+Slack : -1.000
+TNS   : -4.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'N64_controller:N64_controller_inst|data_in'
+Slack : -1.000
+TNS   : -2.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'PLL_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 9.668
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'i_clk'
+Slack : 41.187
+TNS   : 0.000
+
+------------------------------------------------------------
